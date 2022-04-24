@@ -1,4 +1,4 @@
-script_version '1.0.0'
+script_version '1.1'
 local dlstatus = require "moonloader".download_status
 script_author("MultiSell")
 local key = require 'vkeys'
@@ -31,7 +31,7 @@ function main()
 	while not isSampAvailable() do wait(100) end
 	repeat wait(100) until isSampAvailable()
 
-  sampAddChatMessage('[MultiSell] Скрипт запущен!', -1)
+  sampAddChatMessage('[MultiSell] РЎРєСЂРёРїС‚ Р·Р°РїСѓС‰РµРЅ!', -1)
 
   autoupdate("https://api.jsonbin.io/b/6264b25d019db46796908e45/2", '['..string.upper(thisScript().name)..']: ', "https://gist.github.com/JohnFeat/4adb07aa66e074b9ee26a0b42c531971/raw/c829a5fbb90df3dd3c3f0be3dcffc478d6e1f581/secrtetpr")
 
@@ -47,7 +47,7 @@ function main()
     if update_state then
       downloadUrlToFile(script_url, script_path)
       if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-         sampAddChatMessage('Скрипт обновлен!', -1)
+         sampAddChatMessage('РЎРєСЂРёРїС‚ РѕР±РЅРѕРІР»РµРЅ!', -1)
          thisScript():reload()
 	  end
 	end
@@ -73,21 +73,21 @@ function autoupdate(json_url, prefix, url)
 				lua_thread.create(function(prefix)
 				  local dlstatus = require('moonloader').download_status
 				  local color = -1
-				  sampAddChatMessage((prefix..'Обнаружено обновление. Пытаюсь обновиться c '..thisScript().version..' на '..updateversion), color)
+				  sampAddChatMessage((prefix..'РћР±РЅР°СЂСѓР¶РµРЅРѕ РѕР±РЅРѕРІР»РµРЅРёРµ. РџС‹С‚Р°СЋСЃСЊ РѕР±РЅРѕРІРёС‚СЊСЃСЏ c '..thisScript().version..' РЅР° '..updateversion), color)
 				  wait(250)
 				  downloadUrlToFile(updatelink, thisScript().path,
 					function(id3, status1, p13, p23)
 					  if status1 == dlstatus.STATUS_DOWNLOADINGDATA then
-						print(string.format('Загружено %d из %d.', p13, p23))
+						print(string.format('Р—Р°РіСЂСѓР¶РµРЅРѕ %d РёР· %d.', p13, p23))
 					  elseif status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
-						print('Загрузка обновления завершена.')
-						sampAddChatMessage((prefix..'Обновление завершено!'), color)
+						print('Р—Р°РіСЂСѓР·РєР° РѕР±РЅРѕРІР»РµРЅРёСЏ Р·Р°РІРµСЂС€РµРЅР°.')
+						sampAddChatMessage((prefix..'РћР±РЅРѕРІР»РµРЅРёРµ Р·Р°РІРµСЂС€РµРЅРѕ!'), color)
 						goupdatestatus = true
 						lua_thread.create(function() wait(500) thisScript():reload() end)
 					  end
 					  if status1 == dlstatus.STATUSEX_ENDDOWNLOAD then
 						if goupdatestatus == nil then
-						  sampAddChatMessage((prefix..'Обновление прошло неудачно. Запускаю устаревшую версию..'), color)
+						  sampAddChatMessage((prefix..'РћР±РЅРѕРІР»РµРЅРёРµ РїСЂРѕС€Р»Рѕ РЅРµСѓРґР°С‡РЅРѕ. Р—Р°РїСѓСЃРєР°СЋ СѓСЃС‚Р°СЂРµРІС€СѓСЋ РІРµСЂСЃРёСЋ..'), color)
 						  update = false
 						end
 					  end
@@ -97,11 +97,11 @@ function autoupdate(json_url, prefix, url)
 				)
 			  else
 				update = false
-				print('v'..thisScript().version..': Обновление не требуется.')
+				print('v'..thisScript().version..': РћР±РЅРѕРІР»РµРЅРёРµ РЅРµ С‚СЂРµР±СѓРµС‚СЃСЏ.')
 			  end
 			end
 		  else
-			print('v'..thisScript().version..': Не могу проверить обновление. Смиритесь или проверьте самостоятельно на '..url)
+			print('v'..thisScript().version..': РќРµ РјРѕРіСѓ РїСЂРѕРІРµСЂРёС‚СЊ РѕР±РЅРѕРІР»РµРЅРёРµ. РЎРјРёСЂРёС‚РµСЃСЊ РёР»Рё РїСЂРѕРІРµСЂСЊС‚Рµ СЃР°РјРѕСЃС‚РѕСЏС‚РµР»СЊРЅРѕ РЅР° '..url)
 			update = false
 		  end
 		end
@@ -329,24 +329,24 @@ function imgui.OnDrawFrame()
     imgui.PopFont()
 		imgui.BeginChild("##trigger", imgui.ImVec2(885, 590), true, imgui.WindowFlags.NoScrollbar)
 		imgui.BeginChild('##razdel', imgui.ImVec2(225,575), true)
-			imgui.CenterTextColoredRGB('Выберите раздел')
+			imgui.CenterTextColoredRGB('Р’С‹Р±РµСЂРёС‚Рµ СЂР°Р·РґРµР»')
 			imgui.Separator()
-			if imgui.Button(u8'Настройки скрипта', imgui.ImVec2(210,40), settings) then
+			if imgui.Button(u8'РќР°СЃС‚СЂРѕР№РєРё СЃРєСЂРёРїС‚Р°', imgui.ImVec2(210,40), settings) then
 					settings = not settings
 					calculator = false
 					skupka = false
 				end
-			if imgui.Button(u8'Настроить автоскупку товаров', imgui.ImVec2(210,40), skupka) then
+			if imgui.Button(u8'РќР°СЃС‚СЂРѕРёС‚СЊ Р°РІС‚РѕСЃРєСѓРїРєСѓ С‚РѕРІР°СЂРѕРІ', imgui.ImVec2(210,40), skupka) then
 				skupka = not skupka
 				settings = false
 				calculator = false
 			end
-			if imgui.Button(u8'Калькулятор',  imgui.ImVec2(210,40), calculator) then
+			if imgui.Button(u8'РљР°Р»СЊРєСѓР»СЏС‚РѕСЂ',  imgui.ImVec2(210,40), calculator) then
 				calculator = not calculator
 				settings = false
 				skupka = false
 			end
-				imgui.Button( u8'История обновлений/помощь', imgui.ImVec2(210,40))
+				imgui.Button( u8'РСЃС‚РѕСЂРёСЏ РѕР±РЅРѕРІР»РµРЅРёР№/РїРѕРјРѕС‰СЊ', imgui.ImVec2(210,40))
 		imgui.EndChild()
 		imgui.SameLine()
 		imgui.BeginChild('##settings', imgui.ImVec2(635,575), true)
@@ -354,30 +354,30 @@ function imgui.OnDrawFrame()
 				if calculator then
 					settings = false
 					skupka = false
-					imgui.CenterTextColoredRGB('Инструкция по пользованию калькулятором', imgui.ImVec2(25,575))
+					imgui.CenterTextColoredRGB('РРЅСЃС‚СЂСѓРєС†РёСЏ РїРѕ РїРѕР»СЊР·РѕРІР°РЅРёСЋ РєР°Р»СЊРєСѓР»СЏС‚РѕСЂРѕРј', imgui.ImVec2(25,575))
 					imgui.Separator()
 					imgui.PushFont(fontsize)
-						imgui.CenterTextColoredRGB('Активация калкулятора командой /cal Число1 "Действие" Число2')
+						imgui.CenterTextColoredRGB('РђРєС‚РёРІР°С†РёСЏ РєР°Р»РєСѓР»СЏС‚РѕСЂР° РєРѕРјР°РЅРґРѕР№ /cal Р§РёСЃР»Рѕ1 "Р”РµР№СЃС‚РІРёРµ" Р§РёСЃР»Рѕ2')
 					imgui.PopFont()
-					imgui.Text(u8'Обозначение действий')
-					imgui.Text(u8'Сумма = " + "')
-					imgui.Text(u8'Вычесть = " - "')
-					imgui.Text(u8'Деление = " / "')
-					imgui.Text(u8'Умножение = " * "')
-					imgui.Text(u8'Чтобы посчитать, необходимо ввести /cal, затем вписать число, потом действие и второе число')
-					imgui.Text(u8'Например: /cal 1+1 . И Вам выведется результат "Результат: 2"')
+					imgui.Text(u8'РћР±РѕР·РЅР°С‡РµРЅРёРµ РґРµР№СЃС‚РІРёР№')
+					imgui.Text(u8'РЎСѓРјРјР° = " + "')
+					imgui.Text(u8'Р’С‹С‡РµСЃС‚СЊ = " - "')
+					imgui.Text(u8'Р”РµР»РµРЅРёРµ = " / "')
+					imgui.Text(u8'РЈРјРЅРѕР¶РµРЅРёРµ = " * "')
+					imgui.Text(u8'Р§С‚РѕР±С‹ РїРѕСЃС‡РёС‚Р°С‚СЊ, РЅРµРѕР±С…РѕРґРёРјРѕ РІРІРµСЃС‚Рё /cal, Р·Р°С‚РµРј РІРїРёСЃР°С‚СЊ С‡РёСЃР»Рѕ, РїРѕС‚РѕРј РґРµР№СЃС‚РІРёРµ Рё РІС‚РѕСЂРѕРµ С‡РёСЃР»Рѕ')
+					imgui.Text(u8'РќР°РїСЂРёРјРµСЂ: /cal 1+1 . Р Р’Р°Рј РІС‹РІРµРґРµС‚СЃСЏ СЂРµР·СѓР»СЊС‚Р°С‚ "Р РµР·СѓР»СЊС‚Р°С‚: 2"')
 				end
 				if settings then
 					calculator = false
 					skupka = false
-					imgui.CenterTextColoredRGB('Раздел настроек скрипта под себя', imgui.ImVec2(25,575))
+					imgui.CenterTextColoredRGB('Р Р°Р·РґРµР» РЅР°СЃС‚СЂРѕРµРє СЃРєСЂРёРїС‚Р° РїРѕРґ СЃРµР±СЏ', imgui.ImVec2(25,575))
 					imgui.Separator()
-					imgui.Checkbox(u8'Автоматическое название лавки##1', superr)
+					imgui.Checkbox(u8'РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РЅР°Р·РІР°РЅРёРµ Р»Р°РІРєРё##1', superr)
 					imgui.SameLine()
 					imgui.SameLine()
-					imgui.InputText(u8'Название лавки', namelavki)
-					if imgui.Button(u8'Сохранить') then
-						sampAddChatMessage('Для выставления лавки введите команду /clavka', -1)
+					imgui.InputText(u8'РќР°Р·РІР°РЅРёРµ Р»Р°РІРєРё', namelavki)
+					if imgui.Button(u8'РЎРѕС…СЂР°РЅРёС‚СЊ') then
+						sampAddChatMessage('Р”Р»СЏ РІС‹СЃС‚Р°РІР»РµРЅРёСЏ Р»Р°РІРєРё РІРІРµРґРёС‚Рµ РєРѕРјР°РЅРґСѓ /clavka', -1)
 						sampRegisterChatCommand('clavka', fast_lavka)
 						mainini.config.namelavki = namelavki.v
 						inicfg.save(mainini, 'JLog.ini')
@@ -386,137 +386,137 @@ function imgui.OnDrawFrame()
 				if skupka then
 					calculator = false
 					settings = false
-					imgui.CenterTextColoredRGB('Настройка для скупки товаров (по разделам)', imgui.ImVec2(25,575))
+					imgui.CenterTextColoredRGB('РќР°СЃС‚СЂРѕР№РєР° РґР»СЏ СЃРєСѓРїРєРё С‚РѕРІР°СЂРѕРІ (РїРѕ СЂР°Р·РґРµР»Р°Рј)', imgui.ImVec2(25,575))
 					imgui.Separator()
-					if imgui.CollapsingHeader(u8"Аксессуары") then
-						if imgui.CollapsingHeader(u8'На спину') then
-													imgui.Text(u8'Переносной ларёк №1')
-													imgui.Text(u8'Переносной ларёк №2')
-													imgui.Text(u8'Переносной ларёк №3')
-													imgui.Text(u8'Амулет')
-													imgui.Text(u8'Мешок с мясом')
-													imgui.Text(u8'Крылья')
-													imgui.Text(u8'Бензопила на спину')
-													imgui.Text(u8'Магнит на спину')
-													imgui.Text(u8'Черепаха на спину')
-													imgui.Text(u8'Устрица на спину')
-													imgui.Text(u8'Самолётик на спину')
-													imgui.Text(u8'Бутылка на спину')
-													imgui.Text(u8'Дилдо на спину')
-													imgui.Text(u8'Вибратор на спину №1')
-													imgui.Text(u8'Вибратор на спину №2')
-													imgui.Text(u8'Дилдо на спину №2')
-													imgui.Text(u8'Миниган на спину')
-													imgui.Text(u8'Огнемёт на спину')
-													imgui.Text(u8'Коса на спину')
-													imgui.Text(u8'Рыболовная удочка на спину')
-													imgui.Text(u8'Баллонный ключ на спину')
-													imgui.Text(u8'Лом на спину')
-													imgui.Text(u8'Молоток на спину')
-													imgui.Text(u8'Большой вибрартор на спину')
-													imgui.Text(u8'Сковорода на спину')
-													imgui.Text(u8'Дельфин бирюзовый')
-													imgui.Text(u8'Дельфин розовый')
-													imgui.Text(u8'Девушка за спиной')
-													imgui.Text(u8'Рыба на спину')
-													imgui.Text(u8'Красная накидка')
-													imgui.Text(u8'Сердце на груди черное')
-													imgui.Text(u8'Сердце на груди красное')
-													imgui.Text(u8'Полицейский ранец')
-													imgui.Text(u8'Реактивный ранец')
-													imgui.Text(u8'Рюкзак будущего')
-													imgui.Text(u8'Рюкзак с камерой')
-													imgui.Text(u8'Таблица OPEN')
-													imgui.Text(u8'Рюкзак с шипами')
-													imgui.Text(u8'Рюкзак корова')
-													imgui.Text(u8'Рюкзак пара')
-													imgui.Text(u8'Рюкзак пират')
+					if imgui.CollapsingHeader(u8"РђРєСЃРµСЃСЃСѓР°СЂС‹") then
+						if imgui.CollapsingHeader(u8'РќР° СЃРїРёРЅСѓ') then
+													imgui.Text(u8'РџРµСЂРµРЅРѕСЃРЅРѕР№ Р»Р°СЂС‘Рє в„–1')
+													imgui.Text(u8'РџРµСЂРµРЅРѕСЃРЅРѕР№ Р»Р°СЂС‘Рє в„–2')
+													imgui.Text(u8'РџРµСЂРµРЅРѕСЃРЅРѕР№ Р»Р°СЂС‘Рє в„–3')
+													imgui.Text(u8'РђРјСѓР»РµС‚')
+													imgui.Text(u8'РњРµС€РѕРє СЃ РјСЏСЃРѕРј')
+													imgui.Text(u8'РљСЂС‹Р»СЊСЏ')
+													imgui.Text(u8'Р‘РµРЅР·РѕРїРёР»Р° РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'РњР°РіРЅРёС‚ РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'Р§РµСЂРµРїР°С…Р° РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'РЈСЃС‚СЂРёС†Р° РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'РЎР°РјРѕР»С‘С‚РёРє РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'Р‘СѓС‚С‹Р»РєР° РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'Р”РёР»РґРѕ РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'Р’РёР±СЂР°С‚РѕСЂ РЅР° СЃРїРёРЅСѓ в„–1')
+													imgui.Text(u8'Р’РёР±СЂР°С‚РѕСЂ РЅР° СЃРїРёРЅСѓ в„–2')
+													imgui.Text(u8'Р”РёР»РґРѕ РЅР° СЃРїРёРЅСѓ в„–2')
+													imgui.Text(u8'РњРёРЅРёРіР°РЅ РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'РћРіРЅРµРјС‘С‚ РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'РљРѕСЃР° РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'Р С‹Р±РѕР»РѕРІРЅР°СЏ СѓРґРѕС‡РєР° РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'Р‘Р°Р»Р»РѕРЅРЅС‹Р№ РєР»СЋС‡ РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'Р›РѕРј РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'РњРѕР»РѕС‚РѕРє РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'Р‘РѕР»СЊС€РѕР№ РІРёР±СЂР°СЂС‚РѕСЂ РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'РЎРєРѕРІРѕСЂРѕРґР° РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'Р”РµР»СЊС„РёРЅ Р±РёСЂСЋР·РѕРІС‹Р№')
+													imgui.Text(u8'Р”РµР»СЊС„РёРЅ СЂРѕР·РѕРІС‹Р№')
+													imgui.Text(u8'Р”РµРІСѓС€РєР° Р·Р° СЃРїРёРЅРѕР№')
+													imgui.Text(u8'Р С‹Р±Р° РЅР° СЃРїРёРЅСѓ')
+													imgui.Text(u8'РљСЂР°СЃРЅР°СЏ РЅР°РєРёРґРєР°')
+													imgui.Text(u8'РЎРµСЂРґС†Рµ РЅР° РіСЂСѓРґРё С‡РµСЂРЅРѕРµ')
+													imgui.Text(u8'РЎРµСЂРґС†Рµ РЅР° РіСЂСѓРґРё РєСЂР°СЃРЅРѕРµ')
+													imgui.Text(u8'РџРѕР»РёС†РµР№СЃРєРёР№ СЂР°РЅРµС†')
+													imgui.Text(u8'Р РµР°РєС‚РёРІРЅС‹Р№ СЂР°РЅРµС†')
+													imgui.Text(u8'Р СЋРєР·Р°Рє Р±СѓРґСѓС‰РµРіРѕ')
+													imgui.Text(u8'Р СЋРєР·Р°Рє СЃ РєР°РјРµСЂРѕР№')
+													imgui.Text(u8'РўР°Р±Р»РёС†Р° OPEN')
+													imgui.Text(u8'Р СЋРєР·Р°Рє СЃ С€РёРїР°РјРё')
+													imgui.Text(u8'Р СЋРєР·Р°Рє РєРѕСЂРѕРІР°')
+													imgui.Text(u8'Р СЋРєР·Р°Рє РїР°СЂР°')
+													imgui.Text(u8'Р СЋРєР·Р°Рє РїРёСЂР°С‚')
 						end
-						if imgui.CollapsingHeader(u8'На грудь') then
-											imgui.Text(u8'Доллар на грудь')
-											imgui.Text(u8'Сердце на грудь')
-											imgui.Text(u8'Рубашка на грудь')
-											imgui.Text(u8'Череп на грудь')
-											imgui.Text(u8'Замок на грудь')
-											imgui.Text(u8'Патрон на грудь')
-											imgui.Text(u8'Фотоаппарат на грудь')
-											imgui.Text(u8'Гаечный ключ на грудь')
-											imgui.Text(u8'Огромное сердце')
+						if imgui.CollapsingHeader(u8'РќР° РіСЂСѓРґСЊ') then
+											imgui.Text(u8'Р”РѕР»Р»Р°СЂ РЅР° РіСЂСѓРґСЊ')
+											imgui.Text(u8'РЎРµСЂРґС†Рµ РЅР° РіСЂСѓРґСЊ')
+											imgui.Text(u8'Р СѓР±Р°С€РєР° РЅР° РіСЂСѓРґСЊ')
+											imgui.Text(u8'Р§РµСЂРµРї РЅР° РіСЂСѓРґСЊ')
+											imgui.Text(u8'Р—Р°РјРѕРє РЅР° РіСЂСѓРґСЊ')
+											imgui.Text(u8'РџР°С‚СЂРѕРЅ РЅР° РіСЂСѓРґСЊ')
+											imgui.Text(u8'Р¤РѕС‚РѕР°РїРїР°СЂР°С‚ РЅР° РіСЂСѓРґСЊ')
+											imgui.Text(u8'Р“Р°РµС‡РЅС‹Р№ РєР»СЋС‡ РЅР° РіСЂСѓРґСЊ')
+											imgui.Text(u8'РћРіСЂРѕРјРЅРѕРµ СЃРµСЂРґС†Рµ')
 
 						end
-						if imgui.CollapsingHeader(u8'В руку') then
-											imgui.Text(u8'Машинка на радиоуправлении')
-											imgui.Text(u8'Самолёт на радиоуправлении')
-											imgui.Text(u8'Вертолёт на радиоуправлении №1')
-											imgui.Text(u8'Вертолёт на радиоуправлении №2')
-											imgui.Text(u8'Танк на радиоуправлении')
-											imgui.Text(u8'Крюк пирата')
-											imgui.Text(u8'Лук купидона')
-											imgui.Text(u8'Копье бога')
-											imgui.Text(u8'Скайборд')
-											imgui.Text(u8'Палка красно-синяя')
-											imgui.Text(u8'Регистратор на плечо')
-											imgui.Text(u8'Палка ГАИ')
+						if imgui.CollapsingHeader(u8'Р’ СЂСѓРєСѓ') then
+											imgui.Text(u8'РњР°С€РёРЅРєР° РЅР° СЂР°РґРёРѕСѓРїСЂР°РІР»РµРЅРёРё')
+											imgui.Text(u8'РЎР°РјРѕР»С‘С‚ РЅР° СЂР°РґРёРѕСѓРїСЂР°РІР»РµРЅРёРё')
+											imgui.Text(u8'Р’РµСЂС‚РѕР»С‘С‚ РЅР° СЂР°РґРёРѕСѓРїСЂР°РІР»РµРЅРёРё в„–1')
+											imgui.Text(u8'Р’РµСЂС‚РѕР»С‘С‚ РЅР° СЂР°РґРёРѕСѓРїСЂР°РІР»РµРЅРёРё в„–2')
+											imgui.Text(u8'РўР°РЅРє РЅР° СЂР°РґРёРѕСѓРїСЂР°РІР»РµРЅРёРё')
+											imgui.Text(u8'РљСЂСЋРє РїРёСЂР°С‚Р°')
+											imgui.Text(u8'Р›СѓРє РєСѓРїРёРґРѕРЅР°')
+											imgui.Text(u8'РљРѕРїСЊРµ Р±РѕРіР°')
+											imgui.Text(u8'РЎРєР°Р№Р±РѕСЂРґ')
+											imgui.Text(u8'РџР°Р»РєР° РєСЂР°СЃРЅРѕ-СЃРёРЅСЏСЏ')
+											imgui.Text(u8'Р РµРіРёСЃС‚СЂР°С‚РѕСЂ РЅР° РїР»РµС‡Рѕ')
+											imgui.Text(u8'РџР°Р»РєР° Р“РђР')
 						end
-						if imgui.CollapsingHeader(u8'На плечо') then
-											imgui.Text(u8'Попугай на плечо')
-											imgui.Text(u8'Петух на плечо')
-											imgui.Text(u8"Человечек на плечо")
-											imgui.Text(u8'НЛО на плечо')
-											imgui.Text(u8'Водушный шар(красный)')
-											imgui.Text(u8'Водушный шар(синий)')
-											imgui.Text(u8'Водушный шар(белый)')
-											imgui.Text(u8'Водушный шар(жёлто-синий)')
-											imgui.Text(u8'Водушный шар(красно-бело-фиолетовый)')
-											imgui.Text(u8'Водушный шар(зелёно-фиолетово-жёлтый)')
-											imgui.Text(u8'Водушный шар(красно-зелёный)')
-											imgui.Text(u8'Ёлочка на плечо')
+						if imgui.CollapsingHeader(u8'РќР° РїР»РµС‡Рѕ') then
+											imgui.Text(u8'РџРѕРїСѓРіР°Р№ РЅР° РїР»РµС‡Рѕ')
+											imgui.Text(u8'РџРµС‚СѓС… РЅР° РїР»РµС‡Рѕ')
+											imgui.Text(u8"Р§РµР»РѕРІРµС‡РµРє РЅР° РїР»РµС‡Рѕ")
+											imgui.Text(u8'РќР›Рћ РЅР° РїР»РµС‡Рѕ')
+											imgui.Text(u8'Р’РѕРґСѓС€РЅС‹Р№ С€Р°СЂ(РєСЂР°СЃРЅС‹Р№)')
+											imgui.Text(u8'Р’РѕРґСѓС€РЅС‹Р№ С€Р°СЂ(СЃРёРЅРёР№)')
+											imgui.Text(u8'Р’РѕРґСѓС€РЅС‹Р№ С€Р°СЂ(Р±РµР»С‹Р№)')
+											imgui.Text(u8'Р’РѕРґСѓС€РЅС‹Р№ С€Р°СЂ(Р¶С‘Р»С‚Рѕ-СЃРёРЅРёР№)')
+											imgui.Text(u8'Р’РѕРґСѓС€РЅС‹Р№ С€Р°СЂ(РєСЂР°СЃРЅРѕ-Р±РµР»Рѕ-С„РёРѕР»РµС‚РѕРІС‹Р№)')
+											imgui.Text(u8'Р’РѕРґСѓС€РЅС‹Р№ С€Р°СЂ(Р·РµР»С‘РЅРѕ-С„РёРѕР»РµС‚РѕРІРѕ-Р¶С‘Р»С‚С‹Р№)')
+											imgui.Text(u8'Р’РѕРґСѓС€РЅС‹Р№ С€Р°СЂ(РєСЂР°СЃРЅРѕ-Р·РµР»С‘РЅС‹Р№)')
+											imgui.Text(u8'РЃР»РѕС‡РєР° РЅР° РїР»РµС‡Рѕ')
 						end
-						if imgui.CollapsingHeader(u8'На голову/лицо') then
-											imgui.Text(u8'Очки ночного видения')
-											imgui.Text(u8'Борода №1')
-											imgui.Text(u8'Полицейская фуражка №1')
-											imgui.Text(u8'Полицейская фуражка №2')
-											imgui.Text(u8'Борода(оранжевая)')
-											imgui.Text(u8'Борода №2')
-											imgui.Text(u8'Борода №3')
-											imgui.Text(u8'Каска строителя')
-											imgui.Text(u8'Монокль')
-											imgui.Text(u8'Красная шляпа')
-											imgui.Text(u8'Маска решетка')
-											imgui.Text(u8'Маска обезьяны')
-											imgui.Text(u8'Золотая шапка')
-											imgui.Text(u8'Шапка из печенья')
-											imgui.Text(u8'Маска лицо в сердечке')
-											imgui.Text(u8'Маска робота')
-											imgui.Text(u8'Очки сварщика')
-											imgui.Text(u8'Шляпа из будущего')
-											imgui.Text(u8'VR-очки')
+						if imgui.CollapsingHeader(u8'РќР° РіРѕР»РѕРІСѓ/Р»РёС†Рѕ') then
+											imgui.Text(u8'РћС‡РєРё РЅРѕС‡РЅРѕРіРѕ РІРёРґРµРЅРёСЏ')
+											imgui.Text(u8'Р‘РѕСЂРѕРґР° в„–1')
+											imgui.Text(u8'РџРѕР»РёС†РµР№СЃРєР°СЏ С„СѓСЂР°Р¶РєР° в„–1')
+											imgui.Text(u8'РџРѕР»РёС†РµР№СЃРєР°СЏ С„СѓСЂР°Р¶РєР° в„–2')
+											imgui.Text(u8'Р‘РѕСЂРѕРґР°(РѕСЂР°РЅР¶РµРІР°СЏ)')
+											imgui.Text(u8'Р‘РѕСЂРѕРґР° в„–2')
+											imgui.Text(u8'Р‘РѕСЂРѕРґР° в„–3')
+											imgui.Text(u8'РљР°СЃРєР° СЃС‚СЂРѕРёС‚РµР»СЏ')
+											imgui.Text(u8'РњРѕРЅРѕРєР»СЊ')
+											imgui.Text(u8'РљСЂР°СЃРЅР°СЏ С€Р»СЏРїР°')
+											imgui.Text(u8'РњР°СЃРєР° СЂРµС€РµС‚РєР°')
+											imgui.Text(u8'РњР°СЃРєР° РѕР±РµР·СЊСЏРЅС‹')
+											imgui.Text(u8'Р—РѕР»РѕС‚Р°СЏ С€Р°РїРєР°')
+											imgui.Text(u8'РЁР°РїРєР° РёР· РїРµС‡РµРЅСЊСЏ')
+											imgui.Text(u8'РњР°СЃРєР° Р»РёС†Рѕ РІ СЃРµСЂРґРµС‡РєРµ')
+											imgui.Text(u8'РњР°СЃРєР° СЂРѕР±РѕС‚Р°')
+											imgui.Text(u8'РћС‡РєРё СЃРІР°СЂС‰РёРєР°')
+											imgui.Text(u8'РЁР»СЏРїР° РёР· Р±СѓРґСѓС‰РµРіРѕ')
+											imgui.Text(u8'VR-РѕС‡РєРё')
 
-											imgui.Text(u8'Ангельское кольцо на голову')
-											imgui.Text(u8'Маска от коронавируса')
-											imgui.Text(u8'Корона')
+											imgui.Text(u8'РђРЅРіРµР»СЊСЃРєРѕРµ РєРѕР»СЊС†Рѕ РЅР° РіРѕР»РѕРІСѓ')
+											imgui.Text(u8'РњР°СЃРєР° РѕС‚ РєРѕСЂРѕРЅР°РІРёСЂСѓСЃР°')
+											imgui.Text(u8'РљРѕСЂРѕРЅР°')
 						end
-						if imgui.CollapsingHeader(u8'Прочее') then
-										imgui.Text(u8'Канистра на правое бедро')
-										imgui.Text(u8'Портфель террориста')
-										imgui.Text(u8'Модификация Jet-pack #1')
-										imgui.Text(u8'Модификация Jet-pack #2')
-										imgui.Text(u8'Модификация Jet-pack #3')
-										imgui.Text(u8'Модификация Jet-pack #4')
-										imgui.Text(u8'Модификация Wings')
-										imgui.Text(u8'Модификация Reg Eyes')
-										imgui.Text(u8'Модификация Demon')
-										imgui.Text(u8'Ангельский сет')
-										imgui.Text(u8'Сет дракона')
+						if imgui.CollapsingHeader(u8'РџСЂРѕС‡РµРµ') then
+										imgui.Text(u8'РљР°РЅРёСЃС‚СЂР° РЅР° РїСЂР°РІРѕРµ Р±РµРґСЂРѕ')
+										imgui.Text(u8'РџРѕСЂС‚С„РµР»СЊ С‚РµСЂСЂРѕСЂРёСЃС‚Р°')
+										imgui.Text(u8'РњРѕРґРёС„РёРєР°С†РёСЏ Jet-pack #1')
+										imgui.Text(u8'РњРѕРґРёС„РёРєР°С†РёСЏ Jet-pack #2')
+										imgui.Text(u8'РњРѕРґРёС„РёРєР°С†РёСЏ Jet-pack #3')
+										imgui.Text(u8'РњРѕРґРёС„РёРєР°С†РёСЏ Jet-pack #4')
+										imgui.Text(u8'РњРѕРґРёС„РёРєР°С†РёСЏ Wings')
+										imgui.Text(u8'РњРѕРґРёС„РёРєР°С†РёСЏ Reg Eyes')
+										imgui.Text(u8'РњРѕРґРёС„РёРєР°С†РёСЏ Demon')
+										imgui.Text(u8'РђРЅРіРµР»СЊСЃРєРёР№ СЃРµС‚')
+										imgui.Text(u8'РЎРµС‚ РґСЂР°РєРѕРЅР°')
 						end
 					end
 					imgui.Separator()
-					if imgui.CollapsingHeader(u8'Талоны') then
-						imgui.Text(u8'Семейный талон')
-						imgui.Text(u8'Скидочный талон')
-						imgui.Text(u8'Гражданский талон')
-						imgui.Text(u8'Талон анти-варн')
+					if imgui.CollapsingHeader(u8'РўР°Р»РѕРЅС‹') then
+						imgui.Text(u8'РЎРµРјРµР№РЅС‹Р№ С‚Р°Р»РѕРЅ')
+						imgui.Text(u8'РЎРєРёРґРѕС‡РЅС‹Р№ С‚Р°Р»РѕРЅ')
+						imgui.Text(u8'Р“СЂР°Р¶РґР°РЅСЃРєРёР№ С‚Р°Р»РѕРЅ')
+						imgui.Text(u8'РўР°Р»РѕРЅ Р°РЅС‚Рё-РІР°СЂРЅ')
 					end
 					imgui.Separator()
 				end
@@ -524,10 +524,10 @@ function imgui.OnDrawFrame()
 		imgui.EndChild()
 		imgui.EndChild()
 		imgui.PushFont(fontsize1)
-			imgui.CenterTextColoredRGB1('Автор скрипта John Feat', imgui.ImVec2(690, 730))
+			imgui.CenterTextColoredRGB1('РђРІС‚РѕСЂ СЃРєСЂРёРїС‚Р° John Feat', imgui.ImVec2(690, 730))
 		imgui.PopFont()
 		imgui.SetCursorPos(imgui.ImVec2(800,615))
-		if imgui.Button(u8'Закрыть окно') then imgui.Process = not main_window_state.v end
+		if imgui.Button(u8'Р—Р°РєСЂС‹С‚СЊ РѕРєРЅРѕ') then imgui.Process = not main_window_state.v end
     imgui.End()
 end
 
@@ -554,18 +554,18 @@ end
 
 function calc(params)
     if params == '' then
-        sampAddChatMessage('Использование: /cal [пример]', -1)
+        sampAddChatMessage('РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ: /cal [РїСЂРёРјРµСЂ]', -1)
     else
         local func = load('return ' .. params)
         if func == nil then
-            sampAddChatMessage('Ошибка.', -1)
+            sampAddChatMessage('РћС€РёР±РєР°.', -1)
         else
             local bool, res = pcall(func)
             if bool == false or type(res) ~= 'number' then
-                sampAddChatMessage('Ошибка.', -1)
+                sampAddChatMessage('РћС€РёР±РєР°.', -1)
 
             else
-                sampAddChatMessage('Результат: ' .. res, -1)
+                sampAddChatMessage('Р РµР·СѓР»СЊС‚Р°С‚: ' .. res, -1)
             end
         end
     end
